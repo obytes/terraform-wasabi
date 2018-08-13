@@ -1,0 +1,16 @@
+pki
+*.ovpn
+.DS_Store
+.idea/*
+terraform.tfstate
+terraform.tfstate.backup
+account.json
+.terraform
+*.backup
+.temp
+.idea
+.vscode
+*.tfstate
+*.plan
+*.backup
+*.zip
