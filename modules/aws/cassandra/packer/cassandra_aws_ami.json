@@ -1,0 +1,30 @@
+{
+  "variables": {
+    "access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
+    "secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
+    "region": "{{env `AWS_DEFAULT_REGION`}}",
+    "source_ami"    : "ami-cfe4b2b0", // Amazon Linux 2018.03
+    "vpc_id"        : "vpc-12345678",
+    "subnet_id"     : "subnet-12345678",
+    "inst_type"     : "m4.large"
+  },
+  "builders": [{
+    "type": "amazon-ebs",
+    "access_key": "{{user `access_key`}}",
+    "secret_key": "{{user `secret_key`}}",
+    "region": "{{user `region`}}",
+    "vpc_id": "{{user `vpc_id`}}",
+    "subnet_id": "{{user `subnet_id`}}",
+    "associate_public_ip_address": "true",
+    "source_ami": "{{user `source_ami`}}",
+    "instance_type": "{{user `inst_type`}}",
+    "ssh_username": "ec2-user",
+    "ami_name": "amazon-linux-2018.03-cassandra"
+  }],
+  "provisioners": [
+    {
+      "type": "ansible",
+      "playbook_file": "../ansible/cassandra.yml"
+    }
+  ]
+}
