@@ -1,5 +1,5 @@
 module "cassandra" {
-  source = "../../cassandra"
+  source = "../../../modules/aws/cassandra"
 
   # Common
   environment     = "${var.environment}"

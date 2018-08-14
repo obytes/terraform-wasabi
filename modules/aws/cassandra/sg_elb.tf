@@ -6,14 +6,14 @@ resource "aws_security_group" "cassandra_elb_sg" {
     from_port       = 9042
     to_port         = 9042
     protocol        = "tcp"
-    security_groups = ["${var.elb_sg}"]
+    cidr_blocks     = ["0.0.0.0/0"]
   }
 
   ingress {
     from_port       = 9160
     to_port         = 9160
     protocol        = "tcp"
-    security_groups = ["${var.elb_sg}"]
+    cidr_blocks     = ["0.0.0.0/0"]
   }
 
   egress {

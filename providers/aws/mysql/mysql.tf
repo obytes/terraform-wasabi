@@ -8,8 +8,8 @@ resource "aws_security_group" "default" {
     to_port   = 3306
     protocol  = "TCP"
 
-    security_groups = [
-      "${aws_security_group.wasabi_sg.id}",
+    cidr_blocks = [
+      "0.0.0.0/0",
     ]
   }
 
