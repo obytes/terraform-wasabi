@@ -6,7 +6,7 @@ module "cassandra" {
   name            = "${var.name}"
   region          = "${var.region}"
   key_name        = "${var.key_name}"
-  vpc             = "${var.vpc_id}"
+  vpc             = "${data.terraform_remote_state.network_state.vpc["vpc_id"]}"
   private_subnets = "${data.aws_subnet_ids.private_subnets.ids}"
   public_subnets  = "${data.aws_subnet_ids.public_subnets.ids}"
 
@@ -19,7 +19,6 @@ module "cassandra" {
   cassandra_instance_type = "${var.cassandra_instance_type}"
   as_min_size             = "${var.as_min_size}"
   as_max_size             = "${var.as_max_size}"
-  elb_sg                  = "${aws_security_group.wasabi_sg.id}"
   ebs_size                = "${var.ebs_size}"
   ebs_type                = "${var.ebs_type}"
   cassandra_user          = "${var.cassandra_user}"

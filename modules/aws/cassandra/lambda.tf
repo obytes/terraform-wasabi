@@ -2,7 +2,7 @@ resource "aws_lambda_function" "failover_for_seeds" {
   filename      = "${path.module}/index.zip"
   description   = "Start stopped seed instance of cassandra"
   function_name = "start_stopped_seed_lambda"
-  role          = "arn:aws:iam::930466340470:role/iam_for_lambda"
+  role          = "${aws_iam_role.iam_for_lambda.arn}"
   handler       = "index.handler"
   runtime       = "nodejs6.10"
   timeout       = 10

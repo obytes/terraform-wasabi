@@ -13,4 +13,3 @@ account.json
 *.tfstate
 *.plan
 *.backup
-*.zip

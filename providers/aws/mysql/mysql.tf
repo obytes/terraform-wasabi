@@ -1,7 +1,7 @@
 resource "aws_security_group" "default" {
   name        = "${var.environment}-${var.identifier}-sg"
   description = "Allow 3306 in VPC"
-  vpc_id      = "${var.vpc_id}"
+  vpc_id      = "${data.terraform_remote_state.network_state.vpc["vpc_id"]}"
 
   ingress {
     from_port = 3306
@@ -50,7 +50,6 @@ resource "aws_db_instance" "default" {
   iops              = "${var.iops}"
   allocated_storage = "${var.allocated_storage}"
   storage_encrypted = true
-  kms_key_id        = "${data.aws_kms_key.kms.arn}"
 
   name                    = "${var.db_name}"
   username                = "${var.db_username}"

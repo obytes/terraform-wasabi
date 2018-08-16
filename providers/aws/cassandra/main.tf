@@ -9,5 +9,11 @@ provider "template" {
 }
 
 terraform {
+  backend "s3" {
+    bucket     = "wasabi-terraform-state"
+    key        = "aws/cassandra/terraform.tfstate"
+    region     = "us-east-1"
+  }
+
   required_version = "= 0.11.6"
 }

@@ -3,9 +3,9 @@
     "access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
     "secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
     "region": "{{env `AWS_DEFAULT_REGION`}}",
-    "source_ami"    : "ami-cfe4b2b0", // Amazon Linux 2018.03
-    "vpc_id"        : "vpc-12345678",
-    "subnet_id"     : "subnet-12345678",
+    "source_ami"    : "ami-cfe4b2b0",
+    "vpc_id"        : "vpc-04294b5449e362829",
+    "subnet_id"     : "subnet-0ea65a71b3f45b2f5",
     "inst_type"     : "m4.large"
   },
   "builders": [{

@@ -4,8 +4,6 @@
 
 region = "us-east-1"
 
-aws_profile = "aws"
-
 environment = "prod"
 
 name = "wasabi"

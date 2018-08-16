@@ -4,8 +4,6 @@
 
 region = "us-east-1"
 
-aws_profile = "aws"
-
 environment = "prod"
 
 name = "wasabi"
@@ -22,7 +20,7 @@ seed_tag = "cassandra-seed"
 
 azs = ["us-east-1a", "us-east-1c"]
 
-cassandra_ami = "ami-12345678"
+cassandra_ami = "ami-0423e3f8435107f34"
 
 cassandra_instance_type = "m4.large"
 
