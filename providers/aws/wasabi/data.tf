@@ -1,8 +1,9 @@
-data "aws_ami" "wasabi_ami" {
-  most_recent = true
+data "terraform_remote_state" "network_state" {
+  backend = "s3"
 
-  filter {
-    name   = "name"
-    values = ["ubuntu-16.04-wasabi"]
+  config {
+    bucket = "wasabi-terraform-state"
+    key    = "aws/network/terraform.tfstate"
+    region = "us-east-1"
   }
 }

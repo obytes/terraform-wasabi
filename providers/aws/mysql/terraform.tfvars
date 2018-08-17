@@ -21,7 +21,7 @@ db_name = "wasabi"
 
 db_username = "wasabi"
 
-db_password = "wasabi"
+db_password = "wasabipassword"
 
 db_type = "db.t2.large"
 

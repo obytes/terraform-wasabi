@@ -1,6 +1,6 @@
 resource "aws_launch_configuration" "wasabi_lc" {
   name_prefix   = "${var.environment}-${var.name}-wasabi-lc_"
-  image_id      = "${data.aws_ami.wasabi_ami.image_id}"
+  image_id      = "${var.wasabi_ami}"
   instance_type = "${var.wasabi_instance_type}"
   key_name      = "${var.key_name}"
 
@@ -42,7 +42,7 @@ resource "aws_autoscaling_group" "wasabi_create_asg" {
 
 resource "aws_security_group" "wasabi_sg" {
   name        = "${var.environment}-${var.name}-wasabi-sg"
-  vpc_id      = "${var.vpc_id}"
+  vpc_id      = "${data.terraform_remote_state.network_state.vpc["vpc_id"]}"
   description = "Security Group for Wasabi instances"
 
   ingress {
@@ -116,7 +116,7 @@ resource "aws_alb_target_group" "wasabi" {
 
   port     = 8080
   protocol = "HTTP"
-  vpc_id   = "${var.vpc_id}"
+  vpc_id   = "${data.terraform_remote_state.network_state.vpc["vpc_id"]}"
 
   lifecycle {
     create_before_destroy = true
@@ -137,7 +137,7 @@ resource "aws_alb_target_group" "wasabi" {
 
 resource "aws_security_group" "wasabi_alb_sg" {
   name        = "${var.environment}-${var.name}-wasabi-alb-sg"
-  vpc_id      = "${var.vpc_id}"
+  vpc_id      = "${data.terraform_remote_state.network_state.vpc["vpc_id"]}"
   description = "Security Group for the Wasabi ALB"
 
   ingress {
