@@ -1,8 +1,12 @@
+data "template_file" "wasabi_user_data" {
+  template = "${file("${path.module}/templates/wasabi_user_data.tpl")}"
+}
 resource "aws_launch_configuration" "wasabi_lc" {
   name_prefix   = "${var.environment}-${var.name}-wasabi-lc_"
   image_id      = "${var.wasabi_ami}"
   instance_type = "${var.wasabi_instance_type}"
   key_name      = "${var.key_name}"
+  user_data     = "${data.template_file.wasabi_user_data.rendered}"
 
   security_groups = [
     "${aws_security_group.wasabi_sg.id}",
@@ -22,7 +26,7 @@ resource "aws_autoscaling_group" "wasabi_create_asg" {
 
   launch_configuration = "${aws_launch_configuration.wasabi_lc.name}"
   force_delete         = true
-  vpc_zone_identifier  = [""]
+  vpc_zone_identifier  = ["${data.aws_subnet_ids.private_subnets.ids}"]
   min_size             = "${var.wasabi_min_size}"
   max_size             = "${var.wasabi_max_size}"
   desired_capacity     = "${var.wasabi_asg_desired_capacity}"
@@ -90,7 +94,7 @@ resource "aws_alb" "wasabi_alb" {
   internal        = false
   name            = "${var.environment}-${var.name}-wasabi-alb"
   security_groups = ["${aws_security_group.wasabi_alb_sg.id}"]
-  subnets         = [""]
+  subnets         = ["${data.aws_subnet_ids.public_subnets.ids}"]
 
   enable_deletion_protection = false
 
